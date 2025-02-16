@@ -1,48 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
-const NumberGuessingGame = () => {
-  const [targetNumber, setTargetNumber] = useState(0);
-  const [guess, setGuess] = useState('');
-  const [message, setMessage] = useState('');
-  const [attempts, setAttempts] = useState(0);
-  const [gameWon, setGameWon] = useState(false);
-  const [hint, setHint] = useState('');
+const App = () => {
+  const [targetNumber, setTargetNumber] = useState(0)
+  const [guess, setGuess] = useState('')
+  const [message, setMessage] = useState('')
+  const [attempts, setAttempts] = useState(0)
+  const [gameWon, setGameWon] = useState(false)
+  const [hint, setHint] = useState('')
 
   useEffect(() => {
-    startNewGame();
-  }, []);
+    startNewGame()
+  }, [])
 
   const startNewGame = () => {
-    setTargetNumber(Math.floor(Math.random() * 100) + 1);
-    setGuess('');
-    setMessage('');
-    setAttempts(0);
-    setGameWon(false);
-    setHint('Arvaa numero väliltä 1-100');
-  };
+    setTargetNumber(Math.floor(Math.random() * 100) + 1)
+    setGuess('')
+    setMessage('')
+    setAttempts(0)
+    setGameWon(false)
+    setHint('Arvaa numero väliltä 1-100')
+  }
 
   const handleGuess = () => {
-    const guessNum = parseInt(guess);
+    const guessNum = parseInt(guess)
     if (isNaN(guessNum)) {
-      setMessage('Syötä kelvollinen numero!');
-      return;
+      setMessage('Syötä kelvollinen numero!')
+      return
     }
 
-    setAttempts(prev => prev + 1);
+    setAttempts(prev => prev + 1)
     
     if (guessNum === targetNumber) {
-      setMessage(`Onneksi olkoon! Arvasit numeron ${attempts + 1} yrityksellä!`);
-      setGameWon(true);
-      setHint('');
+      setMessage(`Onneksi olkoon! Arvasit numeron ${attempts + 1} yrityksellä!`)
+      setGameWon(true)
+      setHint('')
     } else {
       const newHint = guessNum > targetNumber 
         ? 'Liian suuri numero!' 
-        : 'Liian pieni numero!';
-      setHint(newHint);
-      setMessage(`Yritä uudelleen! (Yritys ${attempts + 1})`);
+        : 'Liian pieni numero!'
+      setHint(newHint)
+      setMessage(`Yritä uudelleen! (Yritys ${attempts + 1})`)
     }
-    setGuess('');
-  };
+    setGuess('')
+  }
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
@@ -94,7 +94,7 @@ const NumberGuessingGame = () => {
         Yrityksiä: {attempts}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NumberGuessingGame;
+export default App
